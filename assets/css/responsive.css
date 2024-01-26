@@ -1,8 +1,28 @@
+@media (max-width: 1360px){
+    .card{width: 90%;}
+    main > section{grid-template-columns: auto auto auto;}
+}
+
+
+
+@media (max-width: 1030px){ }
+
+
+
+@media (max-width: 880px){
+    main > section{grid-template-columns: auto auto;}
+}
+
+
+
 @media (max-width: 670px){
     nav > ul{transform: translateY(-350px);}
     nav > img{display: block; position: fixed; right: 35px;}
 }
 
+
+
 @media (max-width: 600px){
+    main > section{grid-template-columns: auto;}
     .popup{width: 85vw; height: 85vh;}
 }

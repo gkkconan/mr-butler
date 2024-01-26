@@ -1,9 +1,10 @@
 let toggleS = false;
 let toggleP = false;
 
-let menu = document.querySelector('nav > ul');
+let menu = document.querySelector("nav > ul");
 let dropdown = document.querySelector(".dropdown");
 let dropdownContent = document.querySelector(".dropdown-content");
+let deviceToggleState = document.querySelector(".DeviceToggleState");
 
 
 function toggleSidebar(){
@@ -11,22 +12,21 @@ function toggleSidebar(){
     else{ menu.style.transform = "translateY(0)"; menu.classList.add("mobile-menu"); toggleS = true; }
 }
 
-window.addEventListener('resize', function(){
+window.addEventListener('resize', () => {
     if(window.innerWidth > 670){ menu.classList.remove("mobile-menu"); menu.style.transform = "translateY(0)"; }
     if(window.innerWidth < 670){menu.classList.add("mobile-menu"); menu.style.transform = "translateY(-350px)"; }
 });
 
 
-function toggleAddDevidePopup(){
-    let popupContainer = document.querySelector(".popup-add-device");
-
-    if(toggleP){ popupContainer.style.display = "none"; toggleP = false; }
-    else{ popupContainer.style.display = "grid"; toggleP = true; }
-}
-
 
 /*   DROPDOWN SCRIPTS   */
 dropdown.addEventListener('mouseover', () => {  dropdownContent.style.display = 'flex';  });
-dropdown.addEventListener('mouseout', () => {  dropdownTime = setTimeout(function(){dropdownContent.style.display = 'none';}, 1000);  });
+dropdown.addEventListener('mouseleave', () => {  dropdownTime = setTimeout(function(){dropdownContent.style.display = 'none';}, 150);  });
 dropdownContent.addEventListener('mouseover', () => {  clearTimeout(dropdownTime); dropdownContent.style.display = 'flex';  });
-dropdownContent.addEventListener('mouseout', () => {  dropdownContent.style.display = 'none';  });
+dropdownContent.addEventListener('mouseleave', () => {  dropdownContent.style.display = 'none';  });
+
+
+
+deviceToggleState.addEventListener('change', () => {
+    this.checked ? console.log("STATO ATTIVO") : console.log("STATO DISATTIVO");
+})

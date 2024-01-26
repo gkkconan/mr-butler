@@ -1,19 +1,37 @@
+let url = window.location.href;
+let deviceFile = "other/devices.json";
+nDir = "";
+
+urlSplitted = url.split("/");
+parentDir = urlSplitted[urlSplitted.length - 2];
+actualFile = urlSplitted[urlSplitted.length - 1];
+projectUrl = url.slice(url.indexOf(localStorage.getItem("parentDir")))
+
+if(actualFile == "main.html"){ localStorage.setItem("parentDir", parentDir); }
+if(url.startsWith("file:///")){
+    console.log("Applicazione avviata senza live server...");
+    console.log("Avvia il progetto con un server per le http requests");
+}
+
+for(let i = 0; i < (projectUrl.split("/").length - 2); i++){ nDir += "../"; console.log(nDir); }
+
 let info = {};
 let roomsTitle = [];
-let rooms;
+let roomsJson;
 let i = 0;
 
 /*  ROOMS HTML REFERENCE  */
 const roomsDropdown = document.querySelectorAll('.dropdown-content > a');
 
 
-fetch('../other/devices.json')
+
+fetch(nDir + deviceFile)
     .then((response) => response.json())
     .then((json) => {
-        info = json;
-        rooms = info.rooms;
+        rooms = json.rooms;
         manageData(rooms);
         manageDevices(rooms);
+        if(actualFile == "rooms.html") manageRooms(json);
     })
     .catch((error) => {
         console.error('Errore durante il recupero dei dati:', error);
@@ -29,8 +47,9 @@ function manageData(rooms) {
             roomsDropdown[index].textContent = title;
         } else {
             const newRoom = document.createElement('a');
-            newRoom.href = '#';
-            newRoom.textContent = title;
+            //newRoom.href = "http://" + localStorage.getItem("parentDir") + "/pages/rooms/" + title + ".html";
+            newRoom.href = "http://" + localStorage.getItem("parentDir") + "/pages/rooms/room.html";
+            newRoom.textContent = title.split("-").join(" ");
             dropdownContent.appendChild(newRoom);
         }
     });
@@ -43,8 +62,7 @@ function manageData(rooms) {
 function manageDevices(rooms){
     for (const [roomName, roomItems] of Object.entries(rooms)) {
         for (const item of roomItems) {
-            console.log(item.title);
-
+            // console.log(item.title);
             const elementoCard = creaElementoCard(item.title, item.state);
         }
     }
@@ -65,6 +83,7 @@ function creaElementoCard(titolo, statoPredefinitoAttivo){
     card.appendChild(titoloElement);
   
     const toggleInput = document.createElement('input');
+    toggleInput.classList.add('DeviceToggleState')
     toggleInput.type = 'checkbox';
     toggleInput.checked = statoPredefinitoAttivo;
   
@@ -81,3 +100,52 @@ function creaElementoCard(titolo, statoPredefinitoAttivo){
   
     return card;
 }
+
+function insertObjectWithoutRoomProperty(obj, json){
+    const index = json.findIndex(item => item.room === obj.room);
+    if(index !== -1) json.splice(index, 1);
+
+    json.push({ ...obj, room: undefined });
+    return json;
+}
+
+
+
+
+/*  ADD DEVICE POPUP AND FUNCTIONS */
+function toggleAddDevidePopup(){
+    let popupContainer = document.querySelector(".popup-add-device");
+
+    if(toggleP){ popupContainer.style.display = "none"; toggleP = false; }
+    else{ popupContainer.style.display = "grid"; toggleP = true; }
+}
+
+document.forms.addDevice.addEventListener('submit', function(event) {
+    event.preventDefault();
+    toggleAddDevidePopup();
+    let newDevice = {};
+
+    newDevice['title'] = document.forms.addDevice.elements.title.value;
+    newDevice['model'] = document.forms.addDevice.elements.info.value;
+    newDevice['state'] = document.forms.addDevice.elements.state.checked ? true : false;
+    newDevice['room'] = document.forms.addDevice.elements.room.value;
+    newDevice['info'] = document.forms.addDevice.elements.info.value;
+    document.forms.addDevice.reset();
+
+    localStorage.setItem("newDevice", newDevice);
+    console.log(newDevice);
+    insertObjectWithoutRoomProperty(localStorage.getItem("newDevice"), jsonFunc());
+    console.log(jsonFunc());
+});
+
+
+
+
+
+/*  DA SCRIVERE  */
+
+/* function manageRooms(file){
+    for (const roomKey in file){
+        if(file.hasOwnProperty(roomKey)){ roomsTitle.push(roomKey); console.log(roomKey) }
+    }
+} */

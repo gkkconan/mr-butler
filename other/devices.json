@@ -1,16 +1,16 @@
 {
     "rooms": {
-        "Living Room": [
+        "living-room": [
             {"title": "luce principale", "state": true},
             {"title": "luce soggiorno", "state": false},
             {"title": "presa tv", "state": false}
         ],
-        "Kitchen": [
+        "kitchen": [
             {"title": "led dietro tv", "state": true},
             {"title": "luce cucina", "state": false},
             {"title": "lavatrice", "state": true}
         ],
-        "Kids Bedroom": [
+        "kids-bedroom": [
             {"title": "lavastoviglie", "state": true},
             {"title": "luce soggiorno", "state": false},
             {"title": "led dietro tv", "state": true}

@@ -4,55 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="kk.conan">
-    <title>Mr Butler</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <title>Living Room</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
 </head>
 <body>
 
     <header>
         <nav class="align-row">
-            <h2> <a href="../main.html"><span>Mr</span>Butler</a> </h2>
+            <h2> <a href="../../main.html"><span>Mr</span>Butler</a> </h2>
             <ul class="align-row">
-                <li> <a href="../main.html">Home</a> </li>
-                <li> <a href="../pages/404.html">Overview</a> </li>
+                <li> <a href="../../main.html">Home</a> </li>
+                <li> <a href="../404.html">Overview</a> </li>
                 <li>
-                    <button class="dropdown no-bg normal-font"><a href="" class="active">Rooms</a></button>
+                    <button class="dropdown no-bg normal-font"><a href="../rooms.html" class="active">Rooms</a></button>
                     <div class="dropdown-content align-column"></div>
                 </li>
-                <li> <a href="../pages/404.html">Plugins</a> </li>
+                <li> <a href="../404.html">Plugins</a> </li>
                 <li> <button class="add-device" onclick="toggleAddDevidePopup()">Add Device</button> </li>
             </ul>
-            <img src="../assets/svgs/hamburger-menu.svg" alt="hamburger-menu" onclick="toggleSidebar()">
+            <img src="../../assets/svgs/hamburger-menu.svg" alt="hamburger-menu" onclick="toggleSidebar()">
         </nav>
     </header>
 
+    
     <main>
-
-        <section id="rooms-section">
-            <div class="card">
-                <h2>LIVING ROOM</h2>
-                <a href="./rooms/living-room.html" class="center"> <button>OPEN</button> </a>
-            </div>
-
-            <div class="card">
-                <h2>KITCHEN</h2>
-                <a href="" class="center"> <button>OPEN</button> </a>
-            </div>
-
-            <div class="card">
-                <h2>KIDS BEDROOM</h2>
-                <a href="" class="center"> <button>OPEN</button> </a>
-            </div>
-        </section>
-
+        <section id="cards-section"></section>
     </main>
 
 
     <div class="popup-add-device center">
         <span class="overlay" onclick="toggleAddDevidePopup()"></span>
         <div class="popup center">
-            <img src="../assets/svgs/close-btn.svg" onclick="toggleAddDevidePopup()" alt="close-btn" width="50px">
+            <img src="../../assets/svgs/close-btn.svg" onclick="toggleAddDevidePopup()" alt="close-btn" width="50px">
             <h2>Inserisci un dispositivo:</h2>
 
             <form class="align-column" name="addDevice">
@@ -93,8 +77,8 @@
         </div>
     </div>
 
-    <script src="../assets/js/scripts.js"></script>
-    <script src="../assets/js/rooms-and-devices.js"></script>
+    <script src="../../assets/js/scripts.js"></script>
+    <script src="../../assets/js/rooms-and-devices.js"></script>
     
 </body>
 </html>

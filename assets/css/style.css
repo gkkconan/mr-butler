@@ -22,6 +22,7 @@ button{border: none; outline: none; background: none; cursor: pointer;}
 
 /*   general classes   */
 .no-bg{background: none !important;}
+.normal-font{font-weight: normal;}
 .center{display: grid; place-items: center;}
 .align-row{display: flex; flex-direction: row; align-items: center; justify-content: space-between;}
 .align-column{display: flex; flex-direction: column; align-items: center; justify-content: space-between;}
@@ -51,7 +52,9 @@ button{
 button:hover{background-color: var(--secondary); transition: .25s;}
 
 nav > h2{color: white; font-size: 30px;}
-nav > h2 > span{color: var(--secondary);}
+nav > h2 > a{font-size: unset;}
+nav > h2 > a > span{color: var(--secondary);}
+nav > h2 > a:hover{color: white !important;}
 nav > ul{display: flex; align-items: center; list-style: none;}
 nav > ul > li{margin-inline: 15px;}
 nav a{font-size: 15px; transition: .25s;}
@@ -67,7 +70,7 @@ nav > img{display: none; width: 40px; cursor: pointer;}
     margin: 15px 0 0 -25px;
     box-shadow: 0 0 10px 0 #ffffff30;
 }
-.dropdown-content a{margin: 15px 30px;}
+.dropdown-content a{margin: 15px 30px; text-transform: capitalize;}
 
 .mobile-menu{
     width: 100%;
@@ -90,8 +93,13 @@ nav > img{display: none; width: 40px; cursor: pointer;}
 /*   MAIN-CARDS SECTION   */
 
 main{margin-top: 70px;}
+main > section{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    place-items: center;
+    padding: 20px;
+}
 
-main > section{display: flex; flex-wrap: wrap; justify-content: space-around; padding: 20px;}
 .card{
     width: 300px; height: 75px;
     color: var(--primary);
