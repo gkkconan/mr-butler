@@ -26,7 +26,27 @@ dropdownContent.addEventListener('mouseleave', () => {  dropdownContent.style.di
 
 
 
-function gotToggled(id, initialState){
-    let deviceToggleState = document.getElementById(id);
-    deviceToggleState.checked ? console.log("button: " + id + ": STATO ATTIVATO") : console.log("button: " + id + ": STATO DISATTIVATO");
+
+document.forms.addDevice.addEventListener('submit', function(event) {
+    event.preventDefault();
+    toggleAddDevidePopup();
+    let newDevice = {};
+
+    newDevice['title'] = document.forms.addDevice.elements.title.value;
+    newDevice['model'] = document.forms.addDevice.elements.info.value;
+    newDevice['state'] = document.forms.addDevice.elements.state.checked ? true : false;
+    newDevice['room'] = document.forms.addDevice.elements.room.value;
+    newDevice['info'] = document.forms.addDevice.elements.info.value;
+    document.forms.addDevice.reset();
+
+    localStorage.setItem("newDevice", newDevice);
+    console.log(newDevice);
+});
+
+
+
+function toggleAddDevidePopup(){
+    let popupContainer = document.querySelector(".popup-add-device");
+    if(toggleP){ popupContainer.style.display = "none"; toggleP = false; }
+    else{ popupContainer.style.display = "grid"; toggleP = true; }
 }
