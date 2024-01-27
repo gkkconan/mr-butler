@@ -26,7 +26,7 @@ let i = 0;
 const roomsDropdown = document.querySelectorAll('.dropdown-content > a');
 let pageTitle = document.querySelector('.page-title');
 
-actualFile == "living-room.html" ? pageTitle.innerHTML = onlyPageName.split("-").join(" ") : undefined
+actualFile == "room.html" ? pageTitle.innerHTML = localStorage.getItem("redirectToPage").split("-").join(" ") : pageTitle.innerHTML = "dispositivi"
 
 
 fetch(nDir + deviceFile)
@@ -34,7 +34,7 @@ fetch(nDir + deviceFile)
     .then((json) => {
         rooms = json.rooms;
         manageData(rooms);
-        if(actualFile == "living-room.html") manageRooms(json); // momentaneous solution
+        if(actualFile == "room.html") manageRooms(json); // momentaneous solution
         else{ // execute to retrieve all data about all devices
             manageDevices(rooms);
         }
@@ -53,8 +53,9 @@ function manageData(rooms) {
             roomsDropdown[index].textContent = title;
         } else {
             const newRoom = document.createElement('a');
-            newRoom.href = "http://" + localStorage.getItem("parentDir") + "/pages/rooms/" + title + ".html";
-            newRoom.textContent = title.split("-").join(" ");
+            // newRoom.href = "http://" + localStorage.getItem("parentDir") + "/pages/rooms/room.html";
+            newRoom.onclick = () => { redirectToCorrectPage(title) }
+            newRoom.textContent = title;
             dropdownContent.appendChild(newRoom);
         }
     });
@@ -109,11 +110,12 @@ function creaElementoCard(id, titolo, statoPredefinitoAttivo){
 }
 
 function insertObjectWithoutRoomProperty(obj, json){
-    const index = json.findIndex(item => item.room === obj.room);
+    /* const index = json.findIndex(item => item.room === obj.room);
     if(index !== -1) json.splice(index, 1);
 
     json.push({ ...obj, room: undefined });
-    return json;
+    return json; */
+    localStorage.setItem("newDevice", obj)
 }
 
 
@@ -141,8 +143,9 @@ document.forms.addDevice.addEventListener('submit', function(event) {
 
     localStorage.setItem("newDevice", newDevice);
     console.log(newDevice);
-    insertObjectWithoutRoomProperty(localStorage.getItem("newDevice"), jsonFunc());
-    console.log(jsonFunc());
+    //insertObjectWithoutRoomProperty(localStorage.getItem("newDevice"), jsonFunc());
+    insertObjectWithoutRoomProperty(localStorage.getItem("newDevice"));
+    // console.log(jsonFunc());
 });
 
 
@@ -152,17 +155,23 @@ document.forms.addDevice.addEventListener('submit', function(event) {
 /*  DA SCRIVERE  */
 
 function manageRooms(file){
+    let roomDevices = file.rooms[localStorage.getItem("redirectToPage")];
     console.log(file);
-    console.log(file.rooms[onlyPageName]);
+    console.log(file.rooms[localStorage.getItem("redirectToPage")]);
     /* for(const roomName of Object.entries(file)){
         console.log(file.rooms[onlyPageName]);
         console.log(roomName);
 
         if(file.hasOwnProperty(roomKey)){ roomsTitle.push(roomKey); console.log(roomKey) }
     } */
-    for(const item of file.rooms[onlyPageName]){
+    for(const item of roomDevices){
         const elementoCard = creaElementoCard(item.id, item.title, item.state);
     }
+}
+
+function redirectToCorrectPage(title){
+    localStorage.setItem("redirectToPage", title)
+    window.location.href = "http://" + localStorage.getItem("parentDir") + "/pages/rooms/room.html"
 }
 
 
