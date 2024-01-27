@@ -1,19 +1,19 @@
 {
     "rooms": {
         "living-room": [
-            {"title": "luce principale", "state": true},
-            {"title": "luce soggiorno", "state": false},
-            {"title": "presa tv", "state": false}
+            {"id": 0, "title": "luce principale", "state": true},
+            {"id": 1, "title": "luce soggiorno", "state": false},
+            {"id": 2, "title": "presa tv", "state": false}
         ],
         "kitchen": [
-            {"title": "led dietro tv", "state": true},
-            {"title": "luce cucina", "state": false},
-            {"title": "lavatrice", "state": true}
+            {"id": 3, "title": "led dietro tv", "state": true},
+            {"id": 4, "title": "luce cucina", "state": false},
+            {"id": 5, "title": "lavatrice", "state": true}
         ],
         "kids-bedroom": [
-            {"title": "lavastoviglie", "state": true},
-            {"title": "luce soggiorno", "state": false},
-            {"title": "led dietro tv", "state": true}
+            {"id": 6, "title": "lavastoviglie", "state": true},
+            {"id": 7, "title": "luce soggiorno", "state": false},
+            {"id": 8, "title": "led dietro tv", "state": true}
         ]
     },
     "other-devices": "da definire"

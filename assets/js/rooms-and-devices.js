@@ -6,6 +6,8 @@ urlSplitted = url.split("/");
 parentDir = urlSplitted[urlSplitted.length - 2];
 actualFile = urlSplitted[urlSplitted.length - 1];
 projectUrl = url.slice(url.indexOf(localStorage.getItem("parentDir")))
+onlyPageName = actualFile.split(".")[0]
+// to set also a precedent file variable
 
 if(actualFile == "main.html"){ localStorage.setItem("parentDir", parentDir); }
 if(url.startsWith("file:///")){
@@ -22,7 +24,9 @@ let i = 0;
 
 /*  ROOMS HTML REFERENCE  */
 const roomsDropdown = document.querySelectorAll('.dropdown-content > a');
+let pageTitle = document.querySelector('.page-title');
 
+actualFile == "living-room.html" ? pageTitle.innerHTML = onlyPageName.split("-").join(" ") : undefined
 
 
 fetch(nDir + deviceFile)
@@ -30,8 +34,10 @@ fetch(nDir + deviceFile)
     .then((json) => {
         rooms = json.rooms;
         manageData(rooms);
-        manageDevices(rooms);
-        if(actualFile == "rooms.html") manageRooms(json);
+        if(actualFile == "living-room.html") manageRooms(json); // momentaneous solution
+        else{ // execute to retrieve all data about all devices
+            manageDevices(rooms);
+        }
     })
     .catch((error) => {
         console.error('Errore durante il recupero dei dati:', error);
@@ -47,8 +53,7 @@ function manageData(rooms) {
             roomsDropdown[index].textContent = title;
         } else {
             const newRoom = document.createElement('a');
-            //newRoom.href = "http://" + localStorage.getItem("parentDir") + "/pages/rooms/" + title + ".html";
-            newRoom.href = "http://" + localStorage.getItem("parentDir") + "/pages/rooms/room.html";
+            newRoom.href = "http://" + localStorage.getItem("parentDir") + "/pages/rooms/" + title + ".html";
             newRoom.textContent = title.split("-").join(" ");
             dropdownContent.appendChild(newRoom);
         }
@@ -60,10 +65,10 @@ function manageData(rooms) {
 /*     MANAGE CARD DEVICE     */
 
 function manageDevices(rooms){
-    for (const [roomName, roomItems] of Object.entries(rooms)) {
-        for (const item of roomItems) {
+    for(const [roomName, roomItems] of Object.entries(rooms)){
+        for(const item of roomItems){
             // console.log(item.title);
-            const elementoCard = creaElementoCard(item.title, item.state);
+            const elementoCard = creaElementoCard(item.id, item.title, item.state);
         }
     }
 }
@@ -74,7 +79,7 @@ function manageDevices(rooms){
 /*                  CREATE CARD DEVICE                  */
 /*------------------------------------------------------*/
 
-function creaElementoCard(titolo, statoPredefinitoAttivo){
+function creaElementoCard(id, titolo, statoPredefinitoAttivo){
     const card = document.createElement('div');
     card.classList.add('card', 'align-row');
   
@@ -83,7 +88,9 @@ function creaElementoCard(titolo, statoPredefinitoAttivo){
     card.appendChild(titoloElement);
   
     const toggleInput = document.createElement('input');
-    toggleInput.classList.add('DeviceToggleState')
+    toggleInput.classList.add('DeviceToggleState');
+    toggleInput.onclick = () => { gotToggled(id, statoPredefinitoAttivo) }
+    toggleInput.id = id
     toggleInput.type = 'checkbox';
     toggleInput.checked = statoPredefinitoAttivo;
   
@@ -144,8 +151,25 @@ document.forms.addDevice.addEventListener('submit', function(event) {
 
 /*  DA SCRIVERE  */
 
-/* function manageRooms(file){
-    for (const roomKey in file){
+function manageRooms(file){
+    console.log(file);
+    console.log(file.rooms[onlyPageName]);
+    /* for(const roomName of Object.entries(file)){
+        console.log(file.rooms[onlyPageName]);
+        console.log(roomName);
+
         if(file.hasOwnProperty(roomKey)){ roomsTitle.push(roomKey); console.log(roomKey) }
+    } */
+    for(const item of file.rooms[onlyPageName]){
+        const elementoCard = creaElementoCard(item.id, item.title, item.state);
+    }
+}
+
+
+
+/* for (const [roomName, roomItems] of Object.entries(rooms)) {
+    for (const item of roomItems) {
+        // console.log(item.title);
+        const elementoCard = creaElementoCard(item.id, item.title, item.state);
     }
 } */

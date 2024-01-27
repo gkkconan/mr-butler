@@ -12,12 +12,12 @@
 
     <header>
         <nav class="align-row">
-            <h2> <span>Mr</span>Butler </h2>
+            <h2> <a href="../../main.html"><span>Mr</span>Butler</a> </h2>
             <ul class="align-row">
-                <li> <a href="../../index.html">Home</a> </li>
+                <li> <a href="../../main.html">Home</a> </li>
                 <li> <a href="../404.html">Overview</a> </li>
                 <li>
-                    <button class="dropdown no-bg"><a href="../rooms.html" class="active">Rooms</a></button>
+                    <button class="dropdown no-bg normal-font"><a href="../rooms.html" class="active">Rooms</a></button>
                     <div class="dropdown-content align-column"></div>
                 </li>
                 <li> <a href="../404.html">Plugins</a> </li>
@@ -29,6 +29,8 @@
 
     
     <main>
+        <h1 class="page-title"> </h1>
+        <hr>
         <section id="cards-section"></section>
     </main>
 
@@ -39,37 +41,40 @@
             <img src="../../assets/svgs/close-btn.svg" onclick="toggleAddDevidePopup()" alt="close-btn" width="50px">
             <h2>Inserisci un dispositivo:</h2>
 
-            <form class="align-column" action="">
+            <form class="align-column" name="addDevice">
                 <div class="field">
                     <label for="title">Titolo:</label>
                     <input type="text" name="title">
                 </div>
 
                 <div class="field">
-                    <label for="initial-state">Stato Iniziale:</label>
-                    <input type="text" name="initial-state">
+                    <label for="model">Modello:</label>
+                    <input type="text" name="model">
+                </div>
+
+                <div class="field">
+                    <label for="state">Stato Iniziale:</label>
+                    <label class="switch">
+                        <input type="checkbox" name="state">
+                          <span class="slider round"></span>
+                      </label>
                 </div>
 
                 <div class="field">
                     <label for="room">Stanza:</label>
                     <select name="room" id="">
-                        <option value="dog">Living Room</option>
-                        <option value="cat">Kitchen</option>
-                        <option value="hamster">Kids Bedroom</option>
+                        <option>Living Room</option>
+                        <option>Kitchen</option>
+                        <option>Kids Bedroom</option>
                     </select>
                 </div>
 
                 <div class="field">
-                    <label for="title">Titolo:</label>
-                    <input type="text" name="title">
+                    <label for="title">Info:</label>
+                    <input type="text" name="info">
                 </div>
 
-                <div class="field">
-                    <label for="other-info">Altre info:</label>
-                    <input type="text" name="other-info">
-                </div>
-
-                <button class="add-device" type="submit">ADD DEVICE</button>
+                <button type="submit">ADD DEVICE</button>
             </form>
         </div>
     </div>

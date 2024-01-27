@@ -4,7 +4,6 @@ let toggleP = false;
 let menu = document.querySelector("nav > ul");
 let dropdown = document.querySelector(".dropdown");
 let dropdownContent = document.querySelector(".dropdown-content");
-let deviceToggleState = document.querySelector(".DeviceToggleState");
 
 
 function toggleSidebar(){
@@ -27,6 +26,7 @@ dropdownContent.addEventListener('mouseleave', () => {  dropdownContent.style.di
 
 
 
-deviceToggleState.addEventListener('change', () => {
-    this.checked ? console.log("STATO ATTIVO") : console.log("STATO DISATTIVO");
-})
+function gotToggled(id, initialState){
+    let deviceToggleState = document.getElementById(id);
+    deviceToggleState.checked ? console.log("button: " + id + ": STATO ATTIVATO") : console.log("button: " + id + ": STATO DISATTIVATO");
+}
