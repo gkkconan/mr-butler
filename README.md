@@ -1,16 +1,16 @@
 # MrButler - Home Automation Assistant
-MrButler is a home automation assistant developed in pure JavaScript, designed to provide an intuitive and user-friendly interface for managing your smart home devices.
+MrButler is a home automation assistant developed in pure JavaScript, designed to provide an intuitive and user-friendly interface to manage your smart home devices.
 
 
 ## Features
-- **Elegant and Modern UI:** A clean and minimalist design that provides a clear view of the status of your devices.
+- **Elegant and Modern UI:** A clean and minimalist design that allows to know the status of your devices.
 - **Device Management:** Displays the current status of lights, sockets, washing machines, and other home devices.
 
 
 ## To Be Implemented
-- **Device Addition:** The feature to add new devices will be implemented in the future.
-- **Device Deletion:** It will be possible to delete existing devices from the interface.
-- **Device Update:** Update the status and information of the device in real time with the integration of the NodeJS server.
+- **Device Addition:** To add new devices at the home and a specific room.
+- **Device Deletion:** To delete existing devices from the interface.
+- **Device Update:** Update the device's status and informations in real time with the integration of a NodeJS server.
 
 
 ## Getting Started
